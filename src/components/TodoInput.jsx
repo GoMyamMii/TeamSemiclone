@@ -10,11 +10,11 @@ const TodoInput = () => {
 
   const todoLineRef = useRef();
 
-  const todoId = useParams().id;
+  const paramId = useParams().id;
 
   const handleTodoAddClick = () => {
     dispatch(
-      postTodoList({ todoLineValue: todoLineRef.current.value, todoId })
+      postTodoList({ todoLineValue: todoLineRef.current.value, paramId })
     );
   };
 

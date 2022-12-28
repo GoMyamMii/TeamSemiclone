@@ -20,7 +20,7 @@ const TodoList = () => {
     <>
       <TodoInput />
       {todoState.todoListData
-        .filter((todoItem) => todoItem.todoId === todoId)
+        .filter((todoItem) => todoItem.paramId === todoId)
         .map((item) => (
           <Todo
             todoTitle={item.todoLineValue}

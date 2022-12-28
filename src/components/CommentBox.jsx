@@ -22,7 +22,7 @@ const Comment = () => {
     <CommentContainer>
       <CommentInput />
       {commentState.commentListData
-        .filter((commentItem) => commentItem.todoId === todoId)
+        .filter((commentItem) => commentItem.paramId === todoId)
         .map((item) => (
           <CommentList
             comment={item.comment}

@@ -19,14 +19,14 @@ export const getCommentList = createAsyncThunk(
 
 export const postCommentList = createAsyncThunk(
   `${name}/postCommentList`,
-  async ([comment, commenter, commentPw, todoId], thunkAPI) => {
+  async ([comment, commenter, commentPw, paramId], thunkAPI) => {
     try {
       await axios.post(`${process.env.REACT_APP_API}/comments`, {
         comment,
         commenter,
         commentPw,
         id: nanoid(),
-        todoId,
+        paramId,
       });
       const res = await axios.get(`${process.env.REACT_APP_API}/comments`);
       return thunkAPI.fulfillWithValue(res.data);

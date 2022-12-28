@@ -19,13 +19,13 @@ export const getTodoList = createAsyncThunk(
 
 export const postTodoList = createAsyncThunk(
   `${name}/postTodoList`,
-  async ({ todoLineValue, todoId }, thunkAPI) => {
+  async ({ todoLineValue, paramId }, thunkAPI) => {
     try {
       await axios.post(`${process.env.REACT_APP_API}/todos`, {
         todoLineValue,
         id: nanoid(),
         isDone: false,
-        todoId,
+        paramId,
       });
       const res = await axios.get(`${process.env.REACT_APP_API}/todos`);
       return thunkAPI.fulfillWithValue(res.data);

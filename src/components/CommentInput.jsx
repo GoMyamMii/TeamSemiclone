@@ -8,7 +8,7 @@ import Button from "./Button";
 const CommentInput = () => {
   const dispatch = useDispatch();
 
-  const todoId = useParams().id;
+  const paramId = useParams().id;
 
   const commentLineRef = useRef();
   const commenterRef = useRef();
@@ -20,7 +20,7 @@ const CommentInput = () => {
         commentLineRef.current.value,
         commenterRef.current.value,
         commentPwRef.current.value,
-        todoId,
+        paramId,
       ])
     );
     commentLineRef.current.value = "";
