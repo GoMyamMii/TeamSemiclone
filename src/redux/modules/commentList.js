@@ -9,7 +9,7 @@ export const getCommentList = createAsyncThunk(
   `${name}/getCommentList`,
   async (_, thunkAPI) => {
     try {
-      const res = await axios.get("http://localhost:3001/comments");
+      const res = await axios.get(`${process.env.REACT_APP_API}/comments`);
       return thunkAPI.fulfillWithValue(res.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -21,14 +21,14 @@ export const postCommentList = createAsyncThunk(
   `${name}/postCommentList`,
   async ([comment, commenter, commentPw, todoId], thunkAPI) => {
     try {
-      await axios.post("http://localhost:3001/comments", {
+      await axios.post(`${process.env.REACT_APP_API}/comments`, {
         comment,
         commenter,
         commentPw,
         id: nanoid(),
         todoId,
       });
-      const res = await axios.get("http://localhost:3001/comments");
+      const res = await axios.get(`${process.env.REACT_APP_API}/comments`);
       return thunkAPI.fulfillWithValue(res.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -40,9 +40,9 @@ export const deleteCommentList = createAsyncThunk(
   `${name}/deleteCommentList`,
   async (id, thunkAPI) => {
     try {
-      await axios.delete(`http://localhost:3001/comments/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API}/comments/${id}`);
 
-      const res = await axios.get("http://localhost:3001/comments");
+      const res = await axios.get(`${process.env.REACT_APP_API}/comments`);
       return thunkAPI.fulfillWithValue(res.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -54,10 +54,10 @@ export const editCommentList = createAsyncThunk(
   `${name}/editCommentList`,
   async ([id, comment], thunkAPI) => {
     try {
-      await axios.patch(`http://localhost:3001/comments/${id}`, {
+      await axios.patch(`${process.env.REACT_APP_API}/comments/${id}`, {
         comment,
       });
-      const res = await axios.get("http://localhost:3001/comments");
+      const res = await axios.get(`${process.env.REACT_APP_API}/comments`);
       return thunkAPI.fulfillWithValue(res.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

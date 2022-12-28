@@ -16,7 +16,7 @@ export const __getTodoList = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       //response요청으로 서버 데이터 가져오기.
-      const res = await axios.get("http://localhost:3001/todoList");
+      const res = await axios.get(`${process.env.REACT_APP_API}/todoList`);
       return thunkAPI.fulfillWithValue(res.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -30,14 +30,14 @@ export const __postTodoList = createAsyncThunk(
   async ([todoListTitle, user, todoListPw], thunkAPI) => {
     try {
       //payload에 post에 필요한 객체 넣기. input파일의 newTodo를 post thunk에 추가한다.
-      await axios.post("http://localhost:3001/todoList", {
+      await axios.post(`${process.env.REACT_APP_API}/todoList`, {
         id: nanoid(),
         todoListTitle,
         user,
         todoListPw,
       });
       //res로 todoList의 데이터를 다시 불러온다.
-      const res = await axios.get("http://localhost:3001/todoList");
+      const res = await axios.get(`${process.env.REACT_APP_API}/todoList`);
       return thunkAPI.fulfillWithValue(res.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -51,10 +51,10 @@ export const __editodoList = createAsyncThunk(
   async ({ id, todoListTitle }, thunkAPI) => {
     try {
       //patch에 필요한 id값과 title값을 payload에 불러오기
-      await axios.patch(`http://localhost:3001/todoList/${id}`, {
+      await axios.patch(`${process.env.REACT_APP_API}/todoList/${id}`, {
         todoListTitle,
       }); //얘도 수정하면 다시 get한다.
-      const res = await axios.get("http://localhost:3001/todoList");
+      const res = await axios.get(`${process.env.REACT_APP_API}/todoList`);
       return thunkAPI.fulfillWithValue(res.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -66,8 +66,8 @@ export const __deleteTodoList = createAsyncThunk(
   `todoList/__deleteTodoList`,
   async (id, thunkAPI) => {
     try {
-      await axios.delete(`http://localhost:3001/todoList/${id}`);
-      const res = await axios.get("http://localhost:3001/todoList");
+      await axios.delete(`${process.env.REACT_APP_API}/todoList/${id}`);
+      const res = await axios.get(`${process.env.REACT_APP_API}/todoList`);
       return thunkAPI.fulfillWithValue(res.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
