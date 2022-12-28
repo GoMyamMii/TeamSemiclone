@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import TodoMainBox from "./TodoMainBox";
 import TodoListInput from "./TodoListInput";
 import { __getTodoList } from "../redux/modules/todoUser";
+import Button from "./Button";
 
 function Main() {
   const todos = useSelector((state) => state.todoUser.todoList);
@@ -16,13 +17,19 @@ function Main() {
 
   return (
     <StyledListBox>
-      <CreateButton onClick={() => setToggleModal(true)}>
-        투두리스트 생성
-      </CreateButton>
+      <Button
+        onClick={() => setToggleModal(true)}
+        width={"240px"}
+        height={"64px"}
+        borderRadius={"40px"}
+        fontSize={"18px"}
+      >
+        투두리스트 만들기
+      </Button>
       <Modal className={toggleModal ? "block" : null}>
         <Content>
           <Close onClick={() => setToggleModal(false)} />
-          <TodoListInput />
+          <TodoListInput setToggleModal={setToggleModal} />
         </Content>
         <Backdrop onClick={() => setToggleModal(false)} />
       </Modal>
@@ -46,6 +53,10 @@ const StyledListBox = styled.div`
   background: #f8f9fa;
   margin: 0;
   padding: 0;
+  padding-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 //modal style
 const Modal = styled.div`
@@ -94,18 +105,4 @@ const Backdrop = styled.div`
   left: 0;
   background: rgba(0, 0, 0, 0.3);
   z-index: 1;
-`;
-//button
-const CreateButton = styled.button`
-  background: #3d3d3d;
-  cursor: pointer;
-  width: 160px;
-  height: 50px;
-  display: block;
-  color: white;
-  border-radius: 30px;
-  border: none;
-  outline: none;
-  font-size: 16px;
-  margin-left: 43%;
 `;

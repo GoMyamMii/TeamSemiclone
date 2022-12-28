@@ -47,7 +47,11 @@ const CommentList = ({ comment, id, commenter, commentPw }) => {
           )}
 
           <CommenterContainer>{commenter}</CommenterContainer>
-          <CommentPwInput ref={commentPwCheck} placeholder={"비밀번호 입력"} />
+          <CommentPwInput
+            type="password"
+            ref={commentPwCheck}
+            placeholder={"비밀번호 입력"}
+          />
         </RelativeDiv>
         <Button onClick={handleEditClick}>{isEdit ? "Done" : "Edit"}</Button>
         <Button onClick={handleDeleteClick}>Delete</Button>
@@ -63,7 +67,7 @@ const CommentListContainer = styled.div`
 
 const CommentCard = styled.div`
   width: 740px;
-  background-color: #bbb;
+  background-color: #fff;
   border-radius: 5px;
   padding: 20px;
   display: flex;
@@ -98,6 +102,12 @@ const CommentPwInput = styled.input`
   font-size: 12px;
   padding: 5px 10px;
   outline: none;
+  background-color: #ccc;
+  color: #333;
+  &::placeholder {
+    font-size: 10px;
+    color: #333;
+  }
 `;
 
 const EditComment = styled.input`

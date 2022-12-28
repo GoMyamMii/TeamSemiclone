@@ -13,9 +13,13 @@ const TodoInput = () => {
   const paramId = useParams().id;
 
   const handleTodoAddClick = () => {
+    if (!todoLineRef.current.value) {
+      return alert("목표를 적어주세요!");
+    }
     dispatch(
       postTodoList({ todoLineValue: todoLineRef.current.value, paramId })
     );
+    todoLineRef.current.value = "";
   };
 
   return (

@@ -3,29 +3,42 @@ import { useDispatch } from "react-redux";
 import { __postTodoList } from "../redux/modules/todoUser";
 import styled from "styled-components";
 
-function Input() {
+function Input({ setToggleModal }) {
   const [todoListTitle, setTodoListTitle] = useState("");
   const [user, setUser] = useState("");
   const [todoListPw, setTodoListPw] = useState("");
   const [todoListPwConf, setTodoListPwConf] = useState("");
   const [type, setType] = useState("password");
 
-  const passwordRegEx = /^[A-Za-z0-9]{8,20}$/;
   const dispatch = useDispatch();
 
   // new todolist
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (!todoListTitle) {
+      return alert("제목을 입력하세요.");
+    }
+    if (!user) {
+      return alert("닉네임을 입력하세요.");
+    }
+    if (!todoListPw) {
+      return alert("비밀번호를 입력하세요.");
+    }
 
     //password
-    if (todoListPw === todoListPwConf) {
-      dispatch(__postTodoList([todoListTitle, user, todoListPw]));
-    } else if (todoListPw.match(passwordRegEx) === null) {
-      alert("비밀번호 형식을 확인해주세요");
-    } else {
-      alert("비밀번호틀림");
+    if (todoListPw !== todoListPwConf) {
+      return alert("비밀번호를 확인하세요");
     }
+    dispatch(__postTodoList([todoListTitle, user, todoListPw]));
+
+    setToggleModal(false);
+
+    setTodoListTitle("");
+    setUser("");
+    setTodoListPw("");
+    setTodoListPwConf("");
   };
+
   //password show hide
   const show = () => {
     type === "password" ? setType("text") : setType("password");
@@ -51,7 +64,7 @@ function Input() {
           onChange={titleInput}
           value={todoListTitle}
           type="text"
-          placeholder="@@의 투두리스트"
+          placeholder="제목"
         />
         <PasswordInput
           onChange={userInput}

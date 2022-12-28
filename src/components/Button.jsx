@@ -12,6 +12,7 @@ const Button = (props) => {
         backgroundColor={props.backgroundColor}
         color={props.color}
         onClick={props.onClick}
+        borderRadius={props.borderRadius}
       >
         {props.children}
       </AlmightyButton>
@@ -26,7 +27,7 @@ const AlmightyButton = styled.button`
   color: ${(props) => props.color || "#eee"};
   font-size: ${(props) => props.fontSize || "14px"};
   margin-right: ${(props) => props.mr || "0px"};
-  border-radius: 5px;
+  border-radius: ${(props) => props.borderRadius || "5px"};
   cursor: pointer;
 `;
 

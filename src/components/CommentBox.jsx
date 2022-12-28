@@ -37,7 +37,7 @@ const Comment = () => {
 };
 
 const CommentContainer = styled.div`
-  background-color: #ddd;
+  background-color: #f0f0f0;
   padding: 40px 0;
   margin-top: 20px;
 `;

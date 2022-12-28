@@ -68,18 +68,43 @@ function TodoMainBox({ user, todoListTitle, todoListPw, id }) {
           placeholder="등록한 비밀번호를 입력하세요"
         />
         {userEdit ? (
-          <Button onClick={() => handleUpdateSubmit(id, todonewTitle)}>
+          <Button
+            onClick={() => handleUpdateSubmit(id, todonewTitle)}
+            height={"50px"}
+            width={"100px"}
+            mr={"10px"}
+            borderRadius={"40px"}
+          >
             저장
           </Button>
         ) : (
-          <Button onClick={() => editTitleSwitch(id)}>수정</Button>
+          <Button
+            onClick={() => editTitleSwitch(id)}
+            height={"50px"}
+            width={"100px"}
+            mr={"10px"}
+            borderRadius={"40px"}
+          >
+            수정
+          </Button>
         )}
-        <Button onClick={() => passwordSwitch(id)}>삭제</Button>
+        <Button
+          onClick={() => passwordSwitch(id)}
+          height={"50px"}
+          width={"100px"}
+          mr={"10px"}
+          borderRadius={"40px"}
+        >
+          삭제
+        </Button>
         {/* 상세보기로 해당 id 이동*/}
         <Button
           onClick={() => {
             handleOnClickDetailButton(id);
           }}
+          height={"50px"}
+          width={"100px"}
+          borderRadius={"40px"}
         >
           상세보기
         </Button>
@@ -104,8 +129,8 @@ const TodoListUserText = styled.p`
 `;
 //passwordinput
 const PasswordInput = styled.input`
-  padding: 12px;
-  border-radius: 4px;
+  padding: 12px 24px;
+  border-radius: 5px;
   border: 1px solid #dee2e6;
   width: 40%;
   height: 70px;

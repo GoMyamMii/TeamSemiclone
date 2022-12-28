@@ -15,6 +15,15 @@ const CommentInput = () => {
   const commentPwRef = useRef();
 
   const handleAddClick = () => {
+    if (!commentLineRef.current.value) {
+      return alert("댓글을 입력하세요.");
+    }
+    if (!commenterRef.current.value) {
+      return alert("닉네임을 입력하세요");
+    }
+    if (!commentPwRef.current.value) {
+      return alert("비밀번호를 입력하세요");
+    }
     dispatch(
       postCommentList([
         commentLineRef.current.value,
@@ -43,6 +52,7 @@ const CommentInput = () => {
           <CommentInfoInput
             placeholder="비밀번호를 입력하세요."
             ref={commentPwRef}
+            type="password"
           />
         </Div>
       </Div>

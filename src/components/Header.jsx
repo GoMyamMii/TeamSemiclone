@@ -8,7 +8,7 @@ function Header() {
       <StyledP>
         <Link to="/">Home</Link>
       </StyledP>
-      <StyledP>;</StyledP>
+      <StyledP>SemiClone;</StyledP>
     </StyledHeader>
   );
 }
