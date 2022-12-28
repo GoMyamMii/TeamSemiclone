@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { postTodoList } from "../redux/modules/todoList";
 import Button from "./Button";
@@ -9,8 +10,12 @@ const TodoInput = () => {
 
   const todoLineRef = useRef();
 
+  const todoId = useParams().id;
+
   const handleTodoAddClick = () => {
-    dispatch(postTodoList(todoLineRef.current.value));
+    dispatch(
+      postTodoList({ todoLineValue: todoLineRef.current.value, todoId })
+    );
   };
 
   return (

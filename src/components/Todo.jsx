@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import {
-  deleteTodoList,
+  deleteTodoItem,
   editTodoList,
   toggleTodoList,
 } from "../redux/modules/todoList";
@@ -12,8 +12,12 @@ const Todo = ({ todoTitle, id, isDone }) => {
   const dispatch = useDispatch();
   const todoTitleRef = useRef();
   const [isEditTodo, setIsEditTodo] = useState(false);
+  const [updateTodoTitle, setUpdateTodoTitle] = useState(todoTitle);
 
   const handleOnClickEditTodo = () => {
+    if (!updateTodoTitle) {
+      return alert("수정할 내용을 적어주세요");
+    }
     if (!isEditTodo) {
       setIsEditTodo(true);
     } else {
@@ -24,8 +28,12 @@ const Todo = ({ todoTitle, id, isDone }) => {
     }
   };
 
+  const handleOnChangeTodoTitleValue = (e) => {
+    setUpdateTodoTitle(e.target.value);
+  };
+
   const handleOnClickDeleteTodo = () => {
-    dispatch(deleteTodoList(id));
+    dispatch(deleteTodoItem(id));
   };
 
   const handleToggleTodo = () => {
@@ -44,6 +52,8 @@ const Todo = ({ todoTitle, id, isDone }) => {
         {isEditTodo ? (
           <TodoTitleInput
             ref={todoTitleRef}
+            value={updateTodoTitle}
+            onChange={handleOnChangeTodoTitleValue}
             placeholder={"목표를 입력하세요."}
           />
         ) : (

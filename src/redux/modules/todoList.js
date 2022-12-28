@@ -19,12 +19,13 @@ export const getTodoList = createAsyncThunk(
 
 export const postTodoList = createAsyncThunk(
   `${name}/postTodoList`,
-  async (todoTitle, thunkAPI) => {
+  async ({ todoLineValue, todoId }, thunkAPI) => {
     try {
       await axios.post("http://localhost:3001/todos", {
-        todoTitle,
+        todoLineValue,
         id: nanoid(),
         isDone: false,
+        todoId,
       });
       const res = await axios.get("http://localhost:3001/todos");
       return thunkAPI.fulfillWithValue(res.data);
@@ -34,9 +35,10 @@ export const postTodoList = createAsyncThunk(
   }
 );
 
-export const deleteTodoList = createAsyncThunk(
-  `${name}/deleteTodoList`,
+export const deleteTodoItem = createAsyncThunk(
+  `${name}/deleteTodoItem`,
   async (id, thunkAPI) => {
+    console.log(id);
     try {
       await axios.delete(`http://localhost:3001/todos/${id}`);
 
@@ -50,10 +52,10 @@ export const deleteTodoList = createAsyncThunk(
 
 export const editTodoList = createAsyncThunk(
   `${name}/editTodoList`,
-  async ([id, todoTitle], thunkAPI) => {
+  async ([id, todoLineValue], thunkAPI) => {
     try {
       await axios.patch(`http://localhost:3001/todos/${id}`, {
-        todoTitle,
+        todoLineValue,
       });
       const res = await axios.get("http://localhost:3001/todos");
       return thunkAPI.fulfillWithValue(res.data);
@@ -110,16 +112,16 @@ const postTodoListRdc = {
   },
 };
 
-// deleteTodoList 의 reducer
-const deleteTodoListRdc = {
-  [deleteTodoList.pending]: (state, action) => {
+// deleteTodoItem 의 reducer
+const deleteTodoItemRdc = {
+  [deleteTodoItem.pending]: (state, action) => {
     state.isLoading = true;
   },
-  [deleteTodoList.fulfilled]: (state, action) => {
+  [deleteTodoItem.fulfilled]: (state, action) => {
     state.todoListData = action.payload;
     state.isLoading = false;
   },
-  [deleteTodoList.rejected]: (state, action) => {
+  [deleteTodoItem.rejected]: (state, action) => {
     state.error = action.error;
     state.isLoading = false;
   },
@@ -169,7 +171,7 @@ const todoList = createSlice({
   extraReducers: {
     ...getTodoListRdc,
     ...postTodoListRdc,
-    ...deleteTodoListRdc,
+    ...deleteTodoItemRdc,
     ...editTodoListRdc,
     ...toggleTodoListRdc,
   },

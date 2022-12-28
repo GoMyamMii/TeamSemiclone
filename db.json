@@ -1,38 +1,12 @@
 {
-  "todos": [
+  "todos": [],
+  "comments": [],
+  "todoList": [
     {
-      "id": "JK2kQJbieWlEiKxcfix123",
-      "todoTitle": "테스트",
-      "isDone": false
-    },
-    {
-      "id": "JK2kQJbieWlEiKxcf3214ixQU",
-      "todoTitle": "슈퍼테스트",
-      "isDone": false
-    },
-    {
-      "todoTitle": "짱이다",
-      "id": "sC8w6BOReBgJ7uFiQNby9",
-      "isDone": false
-    },
-    {
-      "todoTitle": "오오 신기해~",
-      "id": "DGi82q1_QubE0G8NCdPmD",
-      "isDone": false
-    }
-  ],
-  "comments": [
-    {
-      "comment": "ㅁㄴㅇㄹㅁㄴㅇㄻㄴㅇㄹ",
-      "commenter": "ㅁㄴㅇㄹ123",
-      "commentPw": "ㅁㄴㅇㄹ",
-      "id": "0R0hbSZnFUie1r0DiNS_C"
-    },
-    {
-      "comment": "오호라",
-      "commenter": "닉네임 11",
-      "commentPw": "1234",
-      "id": "Oj_SdSJToPYFxsJHWtcmM"
+      "id": "YUA-YsylZEnS27ygWezEg",
+      "todoListTitle": "첫 번째 게시글",
+      "user": "첫 번째 유저",
+      "todoListPw": "1234"
     }
   ]
 }

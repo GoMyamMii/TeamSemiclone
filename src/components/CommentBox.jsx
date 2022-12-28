@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getCommentList } from "../redux/modules/commentList";
 import CommentInput from "./CommentInput";
@@ -10,6 +11,8 @@ const Comment = () => {
   const commentState = useSelector((state) => state.commentList);
   const dispatch = useDispatch();
 
+  const todoId = useParams().id;
+
   // useEffect 로 처음에 랜더링 할 때 todoState 받아오기
   useEffect(() => {
     commentState.commentListData.length === 0 && dispatch(getCommentList());
@@ -18,15 +21,17 @@ const Comment = () => {
   return (
     <CommentContainer>
       <CommentInput />
-      {commentState.commentListData.map((item) => (
-        <CommentList
-          comment={item.comment}
-          id={item.id}
-          commenter={item.commenter}
-          commentPw={item.commentPw}
-          key={item.id}
-        />
-      ))}
+      {commentState.commentListData
+        .filter((commentItem) => commentItem.todoId === todoId)
+        .map((item) => (
+          <CommentList
+            comment={item.comment}
+            id={item.id}
+            commenter={item.commenter}
+            commentPw={item.commentPw}
+            key={item.id}
+          />
+        ))}
     </CommentContainer>
   );
 };

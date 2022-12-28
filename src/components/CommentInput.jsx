@@ -1,11 +1,14 @@
 import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { postCommentList } from "../redux/modules/commentList";
 import Button from "./Button";
 
 const CommentInput = () => {
   const dispatch = useDispatch();
+
+  const todoId = useParams().id;
 
   const commentLineRef = useRef();
   const commenterRef = useRef();
@@ -17,6 +20,7 @@ const CommentInput = () => {
         commentLineRef.current.value,
         commenterRef.current.value,
         commentPwRef.current.value,
+        todoId,
       ])
     );
     commentLineRef.current.value = "";
