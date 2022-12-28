@@ -9,7 +9,7 @@ export const getTodoList = createAsyncThunk(
   `${name}/getTodoList`,
   async (_, thunkAPI) => {
     try {
-      const res = await axios.get("http://localhost:3001/todos");
+      const res = await axios.get(`${process.env.REACT_APP_API}/todos`);
       return thunkAPI.fulfillWithValue(res.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -21,13 +21,13 @@ export const postTodoList = createAsyncThunk(
   `${name}/postTodoList`,
   async ({ todoLineValue, todoId }, thunkAPI) => {
     try {
-      await axios.post("http://localhost:3001/todos", {
+      await axios.post(`${process.env.REACT_APP_API}/todos`, {
         todoLineValue,
         id: nanoid(),
         isDone: false,
         todoId,
       });
-      const res = await axios.get("http://localhost:3001/todos");
+      const res = await axios.get(`${process.env.REACT_APP_API}/todos`);
       return thunkAPI.fulfillWithValue(res.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -38,11 +38,10 @@ export const postTodoList = createAsyncThunk(
 export const deleteTodoItem = createAsyncThunk(
   `${name}/deleteTodoItem`,
   async (id, thunkAPI) => {
-    console.log(id);
     try {
-      await axios.delete(`http://localhost:3001/todos/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API}/todos/${id}`);
 
-      const res = await axios.get("http://localhost:3001/todos");
+      const res = await axios.get(`${process.env.REACT_APP_API}/todos`);
       return thunkAPI.fulfillWithValue(res.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -54,10 +53,10 @@ export const editTodoList = createAsyncThunk(
   `${name}/editTodoList`,
   async ([id, todoLineValue], thunkAPI) => {
     try {
-      await axios.patch(`http://localhost:3001/todos/${id}`, {
+      await axios.patch(`${process.env.REACT_APP_API}/todos/${id}`, {
         todoLineValue,
       });
-      const res = await axios.get("http://localhost:3001/todos");
+      const res = await axios.get(`${process.env.REACT_APP_API}/todos`);
       return thunkAPI.fulfillWithValue(res.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -69,10 +68,10 @@ export const toggleTodoList = createAsyncThunk(
   `${name}/toggleTodoList`,
   async ([id, isDone], thunkAPI) => {
     try {
-      await axios.patch(`http://localhost:3001/todos/${id}`, {
+      await axios.patch(`${process.env.REACT_APP_API}/todos/${id}`, {
         isDone,
       });
-      const res = await axios.get("http://localhost:3001/todos");
+      const res = await axios.get(`${process.env.REACT_APP_API}/todos`);
       return thunkAPI.fulfillWithValue(res.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

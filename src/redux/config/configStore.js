@@ -6,6 +6,9 @@ import todoUser from "../modules/todoUser";
 
 // modules 모음
 
-const store = configureStore({ reducer: { commentList, todoList, todoUser } });
+const store = configureStore({
+  reducer: { commentList, todoList, todoUser },
+  devTools: process.env.NODE_ENV === "production",
+});
 
 export default store;
